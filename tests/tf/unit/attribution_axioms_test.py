@@ -1,6 +1,6 @@
 import os
 
-os.environ['TRULENS_BACKEND'] = 'tensorflow'
+os.environ['MOO_BACKEND'] = 'tensorflow'
 
 from tensorflow.python.util import deprecation
 
@@ -22,7 +22,7 @@ else:
     )
 
 from tests.unit.attribution_axioms_test_base import AxiomsTestBase
-from trulens_explain.nn.models import get_model_wrapper
+from moo.nn.models import get_model_wrapper
 
 
 class AxiomsTest(AxiomsTestBase, TestCase):

@@ -6,8 +6,8 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import Input
 from tensorflow.keras.models import Model
 from tests.unit.environment_test_base import EnvironmentTestBase
-from trulens_explain.nn.backend import Backend
-from trulens_explain.nn.models.tensorflow_v2 import Tensorflow2ModelWrapper
+from moo.nn.backend import Backend
+from moo.nn.models.tensorflow_v2 import Tensorflow2ModelWrapper
 
 
 class TFSubclassModel(Model):

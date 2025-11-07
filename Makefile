@@ -1,4 +1,4 @@
-# Make targets useful for developing TruLens-Explain.
+# Make targets useful for developing moo.
 # How to use Makefiles: https://opensource.com/article/18/8/what-how-makefile .
 
 # Run target's commands in the same shell.
@@ -70,7 +70,7 @@ upload:
 	read -s -p "Enter PyPi password: " temp
 	# Removes previous build files
 	git clean -fxd
-	# Packages trulens into .whl file
+	# Packages moo into .whl file
 	python setup.py bdist_wheel
 	# Uploads .whl file to PyPi
-	twine upload -u truera -p $$temp dist/*.whl
+	twine upload -p $$temp dist/*.whl

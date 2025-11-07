@@ -1,6 +1,6 @@
 import os
 
-os.environ['TRULENS_BACKEND'] = 'tensorflow'
+os.environ['MOO_BACKEND'] = 'tensorflow'
 
 from unittest import main
 from unittest import TestCase
@@ -12,13 +12,13 @@ from tensorflow.keras.layers import Concatenate
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import Input
 from tensorflow.keras.models import Model
-from trulens_explain.nn.attribution import InternalInfluence
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.nn.distributions import PointDoi
-from trulens_explain.nn.models import get_model_wrapper
-from trulens_explain.nn.quantities import ClassQoI
-from trulens_explain.nn.slices import Cut
-from trulens_explain.nn.slices import InputCut
+from moo.nn.attribution import InternalInfluence
+from moo.nn.backend import get_backend
+from moo.nn.distributions import PointDoi
+from moo.nn.models import get_model_wrapper
+from moo.nn.quantities import ClassQoI
+from moo.nn.slices import Cut
+from moo.nn.slices import InputCut
 
 assert (not tf.executing_eagerly())
 

@@ -5,26 +5,26 @@ from typing import Optional, Tuple
 
 import numpy as np
 import torch
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.nn.backend.pytorch_backend import pytorch
-from trulens_explain.nn.backend.pytorch_backend.pytorch import memory_suggestions
-from trulens_explain.nn.backend.pytorch_backend.pytorch import Tensor
-from trulens_explain.nn.models._model_base import ModelWrapper
-from trulens_explain.nn.quantities import QoI
-from trulens_explain.nn.slices import Cut
-from trulens_explain.nn.slices import InputCut
-from trulens_explain.nn.slices import LogitCut
-from trulens_explain.nn.slices import OutputCut
-from trulens_explain.utils import tru_logger
-from trulens_explain.utils.typing import DATA_CONTAINER_TYPE
-from trulens_explain.utils.typing import Inputs
-from trulens_explain.utils.typing import many_of_om
-from trulens_explain.utils.typing import ModelInputs
-from trulens_explain.utils.typing import nested_map
-from trulens_explain.utils.typing import om_of_many
-from trulens_explain.utils.typing import Outputs
-from trulens_explain.utils.typing import TensorArgs
-from trulens_explain.utils.typing import TensorLike
+from moo.nn.backend import get_backend
+from moo.nn.backend.pytorch_backend import pytorch
+from moo.nn.backend.pytorch_backend.pytorch import memory_suggestions
+from moo.nn.backend.pytorch_backend.pytorch import Tensor
+from moo.nn.models._model_base import ModelWrapper
+from moo.nn.quantities import QoI
+from moo.nn.slices import Cut
+from moo.nn.slices import InputCut
+from moo.nn.slices import LogitCut
+from moo.nn.slices import OutputCut
+from moo.utils import tru_logger
+from moo.utils.typing import DATA_CONTAINER_TYPE
+from moo.utils.typing import Inputs
+from moo.utils.typing import many_of_om
+from moo.utils.typing import ModelInputs
+from moo.utils.typing import nested_map
+from moo.utils.typing import om_of_many
+from moo.utils.typing import Outputs
+from moo.utils.typing import TensorArgs
+from moo.utils.typing import TensorLike
 
 
 class PytorchModelWrapper(ModelWrapper):

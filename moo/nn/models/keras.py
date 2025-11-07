@@ -4,25 +4,25 @@ import os
 import tempfile
 from typing import Tuple
 
-from trulens_explain.nn.backend import Backend
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.nn.models._model_base import ModelWrapper
-from trulens_explain.nn.models.keras_utils import flatten_substitute_tfhub
-from trulens_explain.nn.models.keras_utils import hash_tensor
-from trulens_explain.nn.models.keras_utils import trace_input_indices
-from trulens_explain.nn.models.keras_utils import unhash_tensor
-from trulens_explain.nn.quantities import QoI
-from trulens_explain.nn.slices import Cut
-from trulens_explain.nn.slices import InputCut
-from trulens_explain.nn.slices import LogitCut
-from trulens_explain.nn.slices import OutputCut
-from trulens_explain.utils import tru_logger
-from trulens_explain.utils.typing import DATA_CONTAINER_TYPE
-from trulens_explain.utils.typing import many_of_om
-from trulens_explain.utils.typing import ModelInputs
-from trulens_explain.utils.typing import Outputs
-from trulens_explain.utils.typing import TensorArgs
-from trulens_explain.utils.typing import TensorLike
+from moo.nn.backend import Backend
+from moo.nn.backend import get_backend
+from moo.nn.models._model_base import ModelWrapper
+from moo.nn.models.keras_utils import flatten_substitute_tfhub
+from moo.nn.models.keras_utils import hash_tensor
+from moo.nn.models.keras_utils import trace_input_indices
+from moo.nn.models.keras_utils import unhash_tensor
+from moo.nn.quantities import QoI
+from moo.nn.slices import Cut
+from moo.nn.slices import InputCut
+from moo.nn.slices import LogitCut
+from moo.nn.slices import OutputCut
+from moo.utils import tru_logger
+from moo.utils.typing import DATA_CONTAINER_TYPE
+from moo.utils.typing import many_of_om
+from moo.utils.typing import ModelInputs
+from moo.utils.typing import Outputs
+from moo.utils.typing import TensorArgs
+from moo.utils.typing import TensorLike
 
 
 def import_keras_backend():
@@ -59,7 +59,7 @@ def import_tfhub_deps():
         tfhub = importlib.import_module(name='tensorflow_hub')
     except ModuleNotFoundError:
         tru_logger.info(
-            "To use Trulens with Tensorflow Hub models, run 'pip install tensorflow-hub tf-models-official'"
+            "To use moo with Tensorflow Hub models, run 'pip install tensorflow-hub tf-models-official'"
         )
 
     return tfhub

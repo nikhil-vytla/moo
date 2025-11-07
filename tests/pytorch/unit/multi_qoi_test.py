@@ -1,6 +1,6 @@
 import os
 
-os.environ['TRULENS_BACKEND'] = 'pytorch'
+os.environ['MOO_BACKEND'] = 'pytorch'
 
 from unittest import main
 from unittest import TestCase
@@ -12,8 +12,8 @@ from torch import cat
 from torch.nn import GRU
 from torch.nn import Linear
 from torch.nn import Module
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.nn.models import get_model_wrapper
+from moo.nn.backend import get_backend
+from moo.nn.models import get_model_wrapper
 
 
 class MultiQoiTest(MultiQoiTestBase, TestCase):

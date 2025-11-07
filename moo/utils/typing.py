@@ -89,7 +89,7 @@ List of flexible typings:
 
 Part of the implementation of this design are private variants of public methods
 that do not have most of the above flexibility. Most, however, have the tensor
-vs. numpy array flexibility. These are to be used within Truera for more
+vs. numpy array flexibility. These are to be used within moo for more
 consistent expectations regarding inputs/outputs.
 
     - DoI._wrap_public_call vs. DoI.__call__
@@ -107,19 +107,19 @@ Dealing with Magic Numbers for Axes Indices
     AttributionResult.axes == 
 
     {'attributions': [
-        trulens.utils.typing.Outputs,
-        trulens.utils.typing.Inputs,
+        moo.utils.typing.Outputs,
+        moo.utils.typing.Inputs,
         typing.Union[numpy.ndarray, ~Tensor] # == TensorLike
      ], 
      'gradients': [
-         trulens.utils.typing.Outputs,
-         trulens.utils.typing.Inputs,
-         trulens.utils.typing.Uniform,
+         moo.utils.typing.Outputs,
+         moo.utils.typing.Inputs,
+         moo.utils.typing.Uniform,
          typing.Union[numpy.ndarray, ~Tensor] # == TensorLike
      ],
      'interventions': [
-         trulens.utils.typing.Inputs,
-         trulens.utils.typing.Uniform,
+         moo.utils.typing.Inputs,
+         moo.utils.typing.Uniform,
          typing.Union[numpy.ndarray, ~Tensor] # == TensorLike
      ]}
 

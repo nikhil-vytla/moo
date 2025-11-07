@@ -1,6 +1,6 @@
 import os
 
-os.environ['TRULENS_BACKEND'] = 'pytorch'
+os.environ['MOO_BACKEND'] = 'pytorch'
 
 from unittest import main
 from unittest import TestCase
@@ -11,10 +11,10 @@ from torch import Tensor
 from torch.nn import Linear
 from torch.nn import Module
 from torch.nn import ReLU
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.nn.models.pytorch import PytorchModelWrapper
-from trulens_explain.nn.quantities import MaxClassQoI
-from trulens_explain.nn.slices import Cut
+from moo.nn.backend import get_backend
+from moo.nn.models.pytorch import PytorchModelWrapper
+from moo.nn.quantities import MaxClassQoI
+from moo.nn.slices import Cut
 
 
 class ModelWrapperTest(ModelWrapperTestBase, TestCase):

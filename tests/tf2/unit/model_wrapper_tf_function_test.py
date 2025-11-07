@@ -1,6 +1,6 @@
 import os
 
-os.environ['TRULENS_BACKEND'] = 'tensorflow'
+os.environ['MOO_BACKEND'] = 'tensorflow'
 
 import unittest
 from unittest import main
@@ -12,7 +12,7 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import Input
 from tensorflow.keras.models import Model
 from tests.unit.model_wrapper_test_base import ModelWrapperTestBase
-from trulens_explain.nn.models import get_model_wrapper
+from moo.nn.models import get_model_wrapper
 
 
 class TFFunctionModel(Model):

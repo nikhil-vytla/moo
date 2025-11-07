@@ -1,5 +1,5 @@
 """ 
-The TruLens library is designed to support models implemented via a variety of
+The moo library is designed to support models implemented via a variety of
 different popular python neural network frameworks: Keras (with TensorFlow or 
 Theano backend), TensorFlow, and Pytorch. In order provide the same 
 functionality to models made with frameworks that implement things (e.g., 
@@ -12,27 +12,27 @@ from abc import abstractmethod
 from typing import List, Optional, Tuple, Type, Union
 
 import numpy as np
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.nn.quantities import QoI
-from trulens_explain.nn.slices import Cut
-from trulens_explain.nn.slices import InputCut
-from trulens_explain.nn.slices import OutputCut
-from trulens_explain.utils import tru_logger
-from trulens_explain.utils.typing import ArgsLike
-from trulens_explain.utils.typing import DATA_CONTAINER_TYPE
-from trulens_explain.utils.typing import Inputs
-from trulens_explain.utils.typing import InterventionLike
-from trulens_explain.utils.typing import KwargsLike
-from trulens_explain.utils.typing import many_of_om
-from trulens_explain.utils.typing import ModelInputs
-from trulens_explain.utils.typing import nested_cast
-from trulens_explain.utils.typing import OM
-from trulens_explain.utils.typing import om_of_many
-from trulens_explain.utils.typing import Outputs
-from trulens_explain.utils.typing import TensorAKs
-from trulens_explain.utils.typing import TensorArgs
-from trulens_explain.utils.typing import TensorLike
-from trulens_explain.utils.typing import Tensors
+from moo.nn.backend import get_backend
+from moo.nn.quantities import QoI
+from moo.nn.slices import Cut
+from moo.nn.slices import InputCut
+from moo.nn.slices import OutputCut
+from moo.utils import tru_logger
+from moo.utils.typing import ArgsLike
+from moo.utils.typing import DATA_CONTAINER_TYPE
+from moo.utils.typing import Inputs
+from moo.utils.typing import InterventionLike
+from moo.utils.typing import KwargsLike
+from moo.utils.typing import many_of_om
+from moo.utils.typing import ModelInputs
+from moo.utils.typing import nested_cast
+from moo.utils.typing import OM
+from moo.utils.typing import om_of_many
+from moo.utils.typing import Outputs
+from moo.utils.typing import TensorAKs
+from moo.utils.typing import TensorArgs
+from moo.utils.typing import TensorLike
+from moo.utils.typing import Tensors
 
 
 class ModelWrapper(AbstractBaseClass):

@@ -7,9 +7,9 @@ from typing import Sequence
 
 import numpy as np
 import tensorflow as tf
-from trulens_explain.nn.backend import _ALL_BACKEND_API_FUNCTIONS
-from trulens_explain.nn.backend import Backend
-from trulens_explain.utils.typing import float_size
+from moo.nn.backend import _ALL_BACKEND_API_FUNCTIONS
+from moo.nn.backend import Backend
+from moo.utils.typing import float_size
 
 __all__ = _ALL_BACKEND_API_FUNCTIONS + ['tf1']
 

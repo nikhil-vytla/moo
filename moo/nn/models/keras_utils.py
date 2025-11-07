@@ -1,9 +1,9 @@
 import collections
 
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.utils import tru_logger
-from trulens_explain.utils.typing import many_of_om
-from trulens_explain.utils.typing import om_of_many
+from moo.nn.backend import get_backend
+from moo.utils import tru_logger
+from moo.utils.typing import many_of_om
+from moo.utils.typing import om_of_many
 
 
 def hash_tensor(tensor):
@@ -361,7 +361,7 @@ def trace_input_indices(model, keras_module):
     except AttributeError:
         tru_logger.warning(
             "The provided model is missing Keras graph nodes metadata."
-            "TruLens will assume layers are using their default input/output tensors."
+            "moo will assume layers are using their default input/output tensors."
             "This should not cause issues unless the model's layers have multiple inputs."
         )
         return {}

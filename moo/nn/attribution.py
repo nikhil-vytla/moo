@@ -5,7 +5,7 @@ compute the gradient of a model with respect to its inputs to describe how
 important each input is towards the output prediction. These methods can be
 applied to assist in explaining deep networks.
 
-TruLens provides implementations of several such techniques, found in this
+moo provides implementations of several such techniques, found in this
 package.
 """
 #from __future__ import annotations # Avoid expanding type aliases in mkdocs.
@@ -16,41 +16,41 @@ from dataclasses import dataclass
 from typing import Callable, get_type_hints, List, Tuple, Union
 
 import numpy as np
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.nn.backend import memory_suggestions
-from trulens_explain.nn.backend import rebatch
-from trulens_explain.nn.backend import tile
-from trulens_explain.nn.distributions import DoI
-from trulens_explain.nn.distributions import LinearDoi
-from trulens_explain.nn.distributions import PointDoi
-from trulens_explain.nn.models._model_base import ModelWrapper
-from trulens_explain.nn.quantities import ComparativeQoI
-from trulens_explain.nn.quantities import InternalChannelQoI
-from trulens_explain.nn.quantities import LambdaQoI
-from trulens_explain.nn.quantities import MaxClassQoI
-from trulens_explain.nn.quantities import QoI
-from trulens_explain.nn.slices import Cut
-from trulens_explain.nn.slices import InputCut
-from trulens_explain.nn.slices import OutputCut
-from trulens_explain.nn.slices import Slice
-from trulens_explain.utils import tru_logger
-from trulens_explain.utils.typing import ArgsLike
-from trulens_explain.utils.typing import DATA_CONTAINER_TYPE
-from trulens_explain.utils.typing import Inputs
-from trulens_explain.utils.typing import KwargsLike
-from trulens_explain.utils.typing import many_of_om
-from trulens_explain.utils.typing import MAP_CONTAINER_TYPE
-from trulens_explain.utils.typing import ModelInputs
-from trulens_explain.utils.typing import nested_axes
-from trulens_explain.utils.typing import nested_cast
-from trulens_explain.utils.typing import nested_map
-from trulens_explain.utils.typing import nested_zip
-from trulens_explain.utils.typing import OM
-from trulens_explain.utils.typing import om_of_many
-from trulens_explain.utils.typing import Outputs
-from trulens_explain.utils.typing import TensorArgs
-from trulens_explain.utils.typing import TensorLike
-from trulens_explain.utils.typing import Uniform
+from moo.nn.backend import get_backend
+from moo.nn.backend import memory_suggestions
+from moo.nn.backend import rebatch
+from moo.nn.backend import tile
+from moo.nn.distributions import DoI
+from moo.nn.distributions import LinearDoi
+from moo.nn.distributions import PointDoi
+from moo.nn.models._model_base import ModelWrapper
+from moo.nn.quantities import ComparativeQoI
+from moo.nn.quantities import InternalChannelQoI
+from moo.nn.quantities import LambdaQoI
+from moo.nn.quantities import MaxClassQoI
+from moo.nn.quantities import QoI
+from moo.nn.slices import Cut
+from moo.nn.slices import InputCut
+from moo.nn.slices import OutputCut
+from moo.nn.slices import Slice
+from moo.utils import tru_logger
+from moo.utils.typing import ArgsLike
+from moo.utils.typing import DATA_CONTAINER_TYPE
+from moo.utils.typing import Inputs
+from moo.utils.typing import KwargsLike
+from moo.utils.typing import many_of_om
+from moo.utils.typing import MAP_CONTAINER_TYPE
+from moo.utils.typing import ModelInputs
+from moo.utils.typing import nested_axes
+from moo.utils.typing import nested_cast
+from moo.utils.typing import nested_map
+from moo.utils.typing import nested_zip
+from moo.utils.typing import OM
+from moo.utils.typing import om_of_many
+from moo.utils.typing import Outputs
+from moo.utils.typing import TensorArgs
+from moo.utils.typing import TensorLike
+from moo.utils.typing import Uniform
 
 # Attribution-related type aliases.
 # TODO: Verify these and move to typing utils?
@@ -677,7 +677,7 @@ class InputAttribution(InternalInfluence):
     ```python
     InternalInfluence(
         model,
-        (trulens.nn.slices.InputCut(), cut),
+        (moo.nn.slices.InputCut(), cut),
         qoi,
         doi,
         multiply_activation)
@@ -768,7 +768,7 @@ class InputAttribution(InternalInfluence):
             # line. That would cause an instantiation of InputCut when this
             # class is loaded and before it is used. Because get_backend gets
             # called in Cut.__init__, it may fail if this class is loaded before
-            # trulens.nn.models.get_model_wrapper is called on some model.
+            # moo.nn.models.get_model_wrapper is called on some model.
             doi_cut = InputCut()
 
         super().__init__(
@@ -805,9 +805,9 @@ class IntegratedGradients(InputAttribution):
     ```python
     InternalInfluence(
         model,
-        (trulens.nn.slices.InputCut(), trulens.nn.slices.OutputCut()),
+        (moo.nn.slices.InputCut(), moo.nn.slices.OutputCut()),
         'max',
-        trulens.nn.distributions.LinearDoi(baseline, resolution),
+        moo.nn.distributions.LinearDoi(baseline, resolution),
         multiply_activation=True)
     ```
     """

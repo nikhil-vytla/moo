@@ -1,6 +1,6 @@
 import os
 
-os.environ['TRULENS_BACKEND'] = 'tf.keras'
+os.environ['MOO_BACKEND'] = 'tf.keras'
 
 from tensorflow.python.util import deprecation
 
@@ -14,7 +14,7 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import Input
 from tensorflow.keras.models import Model
 from tests.unit.attribution_axioms_test_base import AxiomsTestBase
-from trulens_explain.nn.models import get_model_wrapper
+from moo.nn.models import get_model_wrapper
 
 
 class AxiomsTest(AxiomsTestBase, TestCase):

@@ -6,15 +6,15 @@ import traceback
 from typing import Iterable, Tuple
 
 import numpy as np
-from trulens_explain.utils import tru_logger
-from trulens_explain.utils.typing import ModelInputs
-from trulens_explain.utils.typing import nested_map
-from trulens_explain.utils.typing import om_of_many
-from trulens_explain.utils.typing import TensorAKs
-from trulens_explain.utils.typing import Tensors
+from moo.utils import tru_logger
+from moo.utils.typing import ModelInputs
+from moo.utils.typing import nested_map
+from moo.utils.typing import om_of_many
+from moo.utils.typing import TensorAKs
+from moo.utils.typing import Tensors
 
 # Do not use directly, use get_backend
-_TRULENS_BACKEND_IMPL = None
+_MOO_BACKEND_IMPL = None
 
 # Each backend module provides:
 # Tensor
@@ -188,53 +188,53 @@ class Backend(Enum):
 
 
 def get_backend(suppress_warnings=False):
-    global _TRULENS_BACKEND_IMPL
-    if 'TRULENS_BACKEND' in os.environ.keys():
-        _TRULENS_BACKEND = Backend.from_name(os.environ['TRULENS_BACKEND'])
+    global _MOO_BACKEND_IMPL
+    if 'MOO_BACKEND' in os.environ.keys():
+        _MOO_BACKEND = Backend.from_name(os.environ['MOO_BACKEND'])
     else:
-        _TRULENS_BACKEND = Backend.UNKNOWN
+        _MOO_BACKEND = Backend.UNKNOWN
     try:
-        if _TRULENS_BACKEND == Backend.PYTORCH:
-            _TRULENS_BACKEND_IMPL = importlib.import_module(
-                name='trulens_explain.nn.backend.pytorch_backend.pytorch'
+        if _MOO_BACKEND == Backend.PYTORCH:
+            _MOO_BACKEND_IMPL = importlib.import_module(
+                name='moo.nn.backend.pytorch_backend.pytorch'
             )
 
-        elif _TRULENS_BACKEND.is_keras_derivative():
-            _TRULENS_BACKEND_IMPL = importlib.import_module(
-                name='trulens.nn.backend.keras_backend.keras'
+        elif _MOO_BACKEND.is_keras_derivative():
+            _MOO_BACKEND_IMPL = importlib.import_module(
+                name='moo.nn.backend.keras_backend.keras'
             )
             # KerasBackend has multiple backend implementations of the keras
             # library, so reload should be called to refresh if backend changes
             # between keras vs tf.keras.
-            if _TRULENS_BACKEND != _TRULENS_BACKEND_IMPL.backend:
-                importlib.reload(_TRULENS_BACKEND_IMPL)
+            if _MOO_BACKEND != _MOO_BACKEND_IMPL.backend:
+                importlib.reload(_MOO_BACKEND_IMPL)
 
-        elif _TRULENS_BACKEND == Backend.TENSORFLOW:
-            _TRULENS_BACKEND_IMPL = importlib.import_module(
-                name='trulens.nn.backend.tf_backend.tf'
+        elif _MOO_BACKEND == Backend.TENSORFLOW:
+            _MOO_BACKEND_IMPL = importlib.import_module(
+                name='moo.nn.backend.tf_backend.tf'
             )
 
-        elif _TRULENS_BACKEND == Backend.UNKNOWN:
+        elif _MOO_BACKEND == Backend.UNKNOWN:
             if not suppress_warnings:
                 tru_logger.warning(
-                    'The current backend is unset or unknown. Trulens will '
+                    'The current backend is unset or unknown. moo will '
                     'attempt to use any previously loaded backends, but may '
                     'cause problems. Valid backends are `pytorch`, '
                     '`tensorflow`, `keras`, and `tf.keras`. You can manually '
                     'set this with '
-                    '`os.environ[\'TRULENS_BACKEND\']=backend_str`. Current '
-                    'loaded backend is {}.'.format(str(_TRULENS_BACKEND_IMPL))
+                    '`os.environ[\'MOO_BACKEND\']=backend_str`. Current '
+                    'loaded backend is {}.'.format(str(_MOO_BACKEND_IMPL))
                 )
 
     except (ImportError, ModuleNotFoundError):
-        _TRULENS_BACKEND_IMPL = None
+        _MOO_BACKEND_IMPL = None
         tru_logger.error(
             'Error processing backend {}. Backend is reset to None'.
-            format(_TRULENS_BACKEND)
+            format(_MOO_BACKEND)
         )
         tru_logger.error(traceback.format_exc())
 
-    return _TRULENS_BACKEND_IMPL
+    return _MOO_BACKEND_IMPL
 
 
 _ALL_BACKEND_API_FUNCTIONS = [

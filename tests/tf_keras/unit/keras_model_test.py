@@ -1,6 +1,6 @@
 import os
 
-os.environ['TRULENS_BACKEND'] = 'tf.keras'
+os.environ['MOO_BACKEND'] = 'tf.keras'
 
 from tensorflow.python.util import deprecation
 
@@ -14,7 +14,7 @@ from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import Input
 from tensorflow.keras.models import Model
 from tests.unit.model_wrapper_test_base import ModelWrapperTestBase
-from trulens_explain.nn.models.keras import KerasModelWrapper
+from moo.nn.models.keras import KerasModelWrapper
 
 
 class ModelWrapperTest(ModelWrapperTestBase, TestCase):

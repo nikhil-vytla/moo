@@ -1,12 +1,12 @@
-"""Utilities for using trulens with NLP models. """
+"""Utilities for using moo with NLP models. """
 
 from typing import Callable, List, Optional, Set, Tuple
 
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.utils.typing import BaselineLike
-from trulens_explain.utils.typing import ModelInputs
-from trulens_explain.utils.typing import Tensor
-from trulens_explain.utils.typing import TensorLike
+from moo.nn.backend import get_backend
+from moo.utils.typing import BaselineLike
+from moo.utils.typing import ModelInputs
+from moo.utils.typing import Tensor
+from moo.utils.typing import TensorLike
 
 
 def token_baseline_swap(

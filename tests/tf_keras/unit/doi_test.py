@@ -1,6 +1,6 @@
 import os
 
-os.environ['TRULENS_BACKEND'] = 'tf.keras'
+os.environ['MOO_BACKEND'] = 'tf.keras'
 
 from unittest import main
 from unittest import TestCase
@@ -13,7 +13,7 @@ from tensorflow.keras.layers import Input
 from tensorflow.keras.layers import Lambda
 from tensorflow.keras.models import Model
 from tests.unit.doi_test_base import DoiTestBase
-from trulens_explain.nn.models.keras import KerasModelWrapper
+from moo.nn.models.keras import KerasModelWrapper
 
 
 class DoiTest(DoiTestBase, TestCase):
