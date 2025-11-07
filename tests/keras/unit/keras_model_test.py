@@ -14,7 +14,7 @@ from keras.layers import Input
 from keras.models import Model
 import numpy as np
 from tests.unit.model_wrapper_test_base import ModelWrapperTestBase
-from trulens_explain.nn.models.keras import KerasModelWrapper
+from moo.nn.models.keras import KerasModelWrapper
 
 
 class ModelWrapperTest(ModelWrapperTestBase, TestCase):

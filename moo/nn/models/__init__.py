@@ -1,11 +1,11 @@
 """ 
-The TruLens library is designed to support models implemented via a variety of
+The moo library is designed to support models implemented via a variety of
 different popular python neural network frameworks: Keras (with TensorFlow or 
 Theano backend), TensorFlow, and Pytorch. Models developed with different frameworks 
 implement things (e.g., gradient computations) a number of different ways. We define 
 framework specific `ModelWrapper` instances to create a unified model API, providing the same 
 functionality to models that are implemented in disparate frameworks. In order to compute 
-attributions for a model, we provide a `trulens.nn.models.get_model_wrapper` function
+attributions for a model, we provide a `moo.nn.models.get_model_wrapper` function
 that will return an appropriate `ModelWrapper` instance.
 
 Some parameters are exclusively utilized for specific frameworks and are outlined 
@@ -15,12 +15,10 @@ import inspect
 import os
 import traceback
 
-from trulens_explain.nn.backend import Backend
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.utils import tru_logger
-from trulens_explain.utils.typing import ModelLike
-
-import trulens
+from moo.nn.backend import Backend
+from moo.nn.backend import get_backend
+from moo.utils import tru_logger
+from moo.utils.typing import ModelLike
 
 
 def discern_backend(model: ModelLike):
@@ -183,7 +181,7 @@ def get_model_wrapper(
         "If this seems incorrect, you can force the correct backend by passing the `backend` parameter directly into your get_model_wrapper call."
     )
     if B.backend.is_keras_derivative():
-        from trulens_explain.nn.models.keras import KerasModelWrapper
+        from moo.nn.models.keras import KerasModelWrapper
         return KerasModelWrapper(
             model,
             logit_layer=logit_layer,
@@ -193,7 +191,7 @@ def get_model_wrapper(
         )
 
     elif B.backend == Backend.PYTORCH:
-        from trulens_explain.nn.models.pytorch import PytorchModelWrapper
+        from moo.nn.models.pytorch import PytorchModelWrapper
         return PytorchModelWrapper(
             model,
             logit_layer=logit_layer,
@@ -203,7 +201,7 @@ def get_model_wrapper(
     elif B.backend == Backend.TENSORFLOW:
         import tensorflow as tf
         if tf.__version__.startswith('2'):
-            from trulens_explain.nn.models.tensorflow_v2 import Tensorflow2ModelWrapper
+            from moo.nn.models.tensorflow_v2 import Tensorflow2ModelWrapper
             return Tensorflow2ModelWrapper(
                 model,
                 logit_layer=logit_layer,
@@ -212,7 +210,7 @@ def get_model_wrapper(
                 custom_objects=custom_objects
             )
         else:
-            from trulens_explain.nn.models.tensorflow_v1 import TensorflowModelWrapper
+            from moo.nn.models.tensorflow_v1 import TensorflowModelWrapper
             if input_tensors is None:
                 tru_logger.error(
                     'tensorflow1 model must pass parameter: input_tensors'

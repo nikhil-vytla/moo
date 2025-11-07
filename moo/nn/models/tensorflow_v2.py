@@ -1,25 +1,25 @@
 from typing import Tuple
 
 import tensorflow as tf
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.nn.models.keras import \
+from moo.nn.backend import get_backend
+from moo.nn.models.keras import \
     KerasModelWrapper  # dangerous to have this here if tf-less keras gets imported
-from trulens_explain.nn.quantities import QoI
-from trulens_explain.nn.slices import Cut
-from trulens_explain.nn.slices import InputCut
-from trulens_explain.nn.slices import LogitCut
-from trulens_explain.nn.slices import OutputCut
-from trulens_explain.utils import tru_logger
-from trulens_explain.utils.typing import DATA_CONTAINER_TYPE
-from trulens_explain.utils.typing import Inputs
-from trulens_explain.utils.typing import many_of_om
-from trulens_explain.utils.typing import ModelInputs
-from trulens_explain.utils.typing import nested_cast
-from trulens_explain.utils.typing import nested_map
-from trulens_explain.utils.typing import om_of_many
-from trulens_explain.utils.typing import Outputs
-from trulens_explain.utils.typing import TensorArgs
-from trulens_explain.utils.typing import TensorLike
+from moo.nn.quantities import QoI
+from moo.nn.slices import Cut
+from moo.nn.slices import InputCut
+from moo.nn.slices import LogitCut
+from moo.nn.slices import OutputCut
+from moo.utils import tru_logger
+from moo.utils.typing import DATA_CONTAINER_TYPE
+from moo.utils.typing import Inputs
+from moo.utils.typing import many_of_om
+from moo.utils.typing import ModelInputs
+from moo.utils.typing import nested_cast
+from moo.utils.typing import nested_map
+from moo.utils.typing import om_of_many
+from moo.utils.typing import Outputs
+from moo.utils.typing import TensorArgs
+from moo.utils.typing import TensorLike
 
 if tf.executing_eagerly():
     tf.config.run_functions_eagerly(True)
@@ -229,7 +229,7 @@ class Tensorflow2ModelWrapper(KerasModelWrapper
 
             results: Outputs[TensorLike]
 
-            # TODO: Clean this all up somehow: trulens for TF2 allows for cuts
+            # TODO: Clean this all up somehow: moo for TF2 allows for cuts
             # with anchors that can refer to a layers's inputs or outputs.
             # Layers can have more than 1 input. In those cases, the size of
             # attribution_layers is not indicative of the how many tensors there

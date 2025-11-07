@@ -2,14 +2,14 @@ from unittest import main
 from unittest import TestCase
 
 import numpy as np
-from trulens_explain.nn.attribution import InternalInfluence
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.nn.distributions import DoI
-from trulens_explain.nn.quantities import QoI
-from trulens_explain.nn.slices import Cut
-from trulens_explain.utils.typing import OM
-from trulens_explain.utils.typing import Outputs
-from trulens_explain.utils.typing import Tensor
+from moo.nn.attribution import InternalInfluence
+from moo.nn.backend import get_backend
+from moo.nn.distributions import DoI
+from moo.nn.quantities import QoI
+from moo.nn.slices import Cut
+from moo.utils.typing import OM
+from moo.utils.typing import Outputs
+from moo.utils.typing import Tensor
 
 
 class PerTimestepQoI(QoI):

@@ -2,9 +2,9 @@ import importlib
 import os
 
 import numpy as np
-from trulens_explain.nn.backend import Backend
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.nn.models import get_model_wrapper
+from moo.nn.backend import Backend
+from moo.nn.backend import get_backend
+from moo.nn.models import get_model_wrapper
 
 import trulens
 

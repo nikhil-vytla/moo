@@ -6,12 +6,12 @@ import traceback
 from typing import Iterable, Tuple
 
 import numpy as np
-from trulens_explain.utils import tru_logger
-from trulens_explain.utils.typing import ModelInputs
-from trulens_explain.utils.typing import nested_map
-from trulens_explain.utils.typing import om_of_many
-from trulens_explain.utils.typing import TensorAKs
-from trulens_explain.utils.typing import Tensors
+from moo.utils import tru_logger
+from moo.utils.typing import ModelInputs
+from moo.utils.typing import nested_map
+from moo.utils.typing import om_of_many
+from moo.utils.typing import TensorAKs
+from moo.utils.typing import Tensors
 
 # Do not use directly, use get_backend
 _TRULENS_BACKEND_IMPL = None
@@ -196,12 +196,12 @@ def get_backend(suppress_warnings=False):
     try:
         if _TRULENS_BACKEND == Backend.PYTORCH:
             _TRULENS_BACKEND_IMPL = importlib.import_module(
-                name='trulens_explain.nn.backend.pytorch_backend.pytorch'
+                name='moo.nn.backend.pytorch_backend.pytorch'
             )
 
         elif _TRULENS_BACKEND.is_keras_derivative():
             _TRULENS_BACKEND_IMPL = importlib.import_module(
-                name='trulens.nn.backend.keras_backend.keras'
+                name='moo.nn.backend.keras_backend.keras'
             )
             # KerasBackend has multiple backend implementations of the keras
             # library, so reload should be called to refresh if backend changes
@@ -211,7 +211,7 @@ def get_backend(suppress_warnings=False):
 
         elif _TRULENS_BACKEND == Backend.TENSORFLOW:
             _TRULENS_BACKEND_IMPL = importlib.import_module(
-                name='trulens.nn.backend.tf_backend.tf'
+                name='moo.nn.backend.tf_backend.tf'
             )
 
         elif _TRULENS_BACKEND == Backend.UNKNOWN:

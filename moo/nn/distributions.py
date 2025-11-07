@@ -11,24 +11,24 @@ from abc import abstractmethod
 from typing import Callable, Optional
 
 import numpy as np
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.nn.slices import Cut
-from trulens_explain.utils.typing import accepts_model_inputs
-from trulens_explain.utils.typing import BaselineLike
-from trulens_explain.utils.typing import DATA_CONTAINER_TYPE
-from trulens_explain.utils.typing import Inputs
-from trulens_explain.utils.typing import many_of_om
-from trulens_explain.utils.typing import MAP_CONTAINER_TYPE
-from trulens_explain.utils.typing import ModelInputs
-from trulens_explain.utils.typing import nested_cast
-from trulens_explain.utils.typing import nested_map
-from trulens_explain.utils.typing import nested_zip
-from trulens_explain.utils.typing import OM
-from trulens_explain.utils.typing import om_of_many
-from trulens_explain.utils.typing import render_object
-from trulens_explain.utils.typing import TensorAKs
-from trulens_explain.utils.typing import TensorLike
-from trulens_explain.utils.typing import Uniform
+from moo.nn.backend import get_backend
+from moo.nn.slices import Cut
+from moo.utils.typing import accepts_model_inputs
+from moo.utils.typing import BaselineLike
+from moo.utils.typing import DATA_CONTAINER_TYPE
+from moo.utils.typing import Inputs
+from moo.utils.typing import many_of_om
+from moo.utils.typing import MAP_CONTAINER_TYPE
+from moo.utils.typing import ModelInputs
+from moo.utils.typing import nested_cast
+from moo.utils.typing import nested_map
+from moo.utils.typing import nested_zip
+from moo.utils.typing import OM
+from moo.utils.typing import om_of_many
+from moo.utils.typing import render_object
+from moo.utils.typing import TensorAKs
+from moo.utils.typing import TensorLike
+from moo.utils.typing import Uniform
 
 
 class DoiCutSupportError(ValueError):

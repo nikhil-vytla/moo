@@ -27,18 +27,18 @@ from matplotlib.colors import ListedColormap
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.ndimage.filters import gaussian_filter
-from trulens_explain.nn.attribution import AttributionMethod
-from trulens_explain.nn.attribution import InternalInfluence
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.nn.distributions import PointDoi
-from trulens_explain.nn.models._model_base import ModelWrapper
-from trulens_explain.nn.quantities import InternalChannelQoI
-from trulens_explain.nn.slices import Cut
-from trulens_explain.nn.slices import InputCut
-from trulens_explain.utils import tru_logger
-from trulens_explain.utils.typing import KwargsLike
-from trulens_explain.utils.typing import ModelInputs
-from trulens_explain.utils.typing import Tensor
+from moo.nn.attribution import AttributionMethod
+from moo.nn.attribution import InternalInfluence
+from moo.nn.backend import get_backend
+from moo.nn.distributions import PointDoi
+from moo.nn.models._model_base import ModelWrapper
+from moo.nn.quantities import InternalChannelQoI
+from moo.nn.slices import Cut
+from moo.nn.slices import InputCut
+from moo.utils import tru_logger
+from moo.utils.typing import KwargsLike
+from moo.utils.typing import ModelInputs
+from moo.utils.typing import Tensor
 
 
 class Tiler(object):

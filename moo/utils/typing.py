@@ -107,19 +107,19 @@ Dealing with Magic Numbers for Axes Indices
     AttributionResult.axes == 
 
     {'attributions': [
-        trulens.utils.typing.Outputs,
-        trulens.utils.typing.Inputs,
+        moo.utils.typing.Outputs,
+        moo.utils.typing.Inputs,
         typing.Union[numpy.ndarray, ~Tensor] # == TensorLike
      ], 
      'gradients': [
-         trulens.utils.typing.Outputs,
-         trulens.utils.typing.Inputs,
-         trulens.utils.typing.Uniform,
+         moo.utils.typing.Outputs,
+         moo.utils.typing.Inputs,
+         moo.utils.typing.Uniform,
          typing.Union[numpy.ndarray, ~Tensor] # == TensorLike
      ],
      'interventions': [
-         trulens.utils.typing.Inputs,
-         trulens.utils.typing.Uniform,
+         moo.utils.typing.Inputs,
+         moo.utils.typing.Uniform,
          typing.Union[numpy.ndarray, ~Tensor] # == TensorLike
      ]}
 

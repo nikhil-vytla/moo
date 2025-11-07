@@ -5,9 +5,9 @@ from unittest import TestCase
 from tests.unit.environment_test_base import EnvironmentTestBase
 from torch.nn import Linear
 from torch.nn import Module
-from trulens_explain.nn.backend import Backend
-from trulens_explain.nn.backend import get_backend
-from trulens_explain.nn.models.pytorch import PytorchModelWrapper
+from moo.nn.backend import Backend
+from moo.nn.backend import get_backend
+from moo.nn.models.pytorch import PytorchModelWrapper
 
 
 class EnvironmentTest(EnvironmentTestBase, TestCase):

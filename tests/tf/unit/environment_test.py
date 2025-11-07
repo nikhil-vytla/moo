@@ -13,8 +13,8 @@ else:
     )
 
 from tests.unit.environment_test_base import EnvironmentTestBase
-from trulens_explain.nn.backend import Backend
-from trulens_explain.nn.models.tensorflow_v1 import TensorflowModelWrapper
+from moo.nn.backend import Backend
+from moo.nn.models.tensorflow_v1 import TensorflowModelWrapper
 
 
 class EnvironmentTest(EnvironmentTestBase, TestCase):

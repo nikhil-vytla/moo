@@ -1,26 +1,35 @@
-"""Tensorflow Backend
+"""Keras backend
 """
 # pylint: disable=no-member
 # pylint: disable=not-callable
 
+import os
 from typing import Sequence
 
 import numpy as np
-import tensorflow as tf
-from trulens_explain.nn.backend import _ALL_BACKEND_API_FUNCTIONS
-from trulens_explain.nn.backend import Backend
-from trulens_explain.utils.typing import float_size
+from moo.nn.backend import _ALL_BACKEND_API_FUNCTIONS
+from moo.nn.backend import Backend
+from moo.utils.typing import float_size
 
-__all__ = _ALL_BACKEND_API_FUNCTIONS + ['tf1']
+__all__ = _ALL_BACKEND_API_FUNCTIONS
 
-floatX = tf.keras.backend.floatx()
+if 'TRULENS_BACKEND' in os.environ.keys():
+    _TRULENS_BACKEND = os.environ['TRULENS_BACKEND']
+
+backend = Backend.from_name(_TRULENS_BACKEND)
+
+if backend == Backend.TF_KERAS:
+    import tensorflow as tf
+    import tensorflow.keras.backend as K
+else:
+    import keras.backend as K
+
+floatX = K.floatx()
 floatX_size = float_size(str(floatX))
-Tensor = tf.Tensor
-dim_order = 'channels_last'
+Tensor = type(K.constant((1, 1), dtype=floatX))
+TensorVar = type(K.zeros((1, 1), dtype=floatX))
+dim_order = K.image_data_format()
 channel_axis = 1 if dim_order == 'channels_first' else 3
-backend = Backend.TENSORFLOW
-
-tf1 = tf.__version__.startswith('1.')
 
 
 def set_seed(seed: int) -> None:
@@ -40,7 +49,7 @@ def gradient(scalar, wrt):
     Parameters
     ----------
     scalar : backend.Tensor
-        The scalar tensor result of a computation for which the gradient will be
+        The scalar tensor result of a computation for which the gradient will be 
         computed.
     wrt : backend.Tensor
         Tensor that the gradient is taken with respect to.
@@ -50,7 +59,15 @@ def gradient(scalar, wrt):
     list
         A list of computed gradient; same shape as wrt
     """
-    return tf.gradients(scalar, wrt)
+    if not isinstance(wrt, list):
+        wrt = [wrt]
+
+    grads = K.gradients(scalar, wrt)
+
+    if not isinstance(grads, list):
+        return [grads]
+    else:
+        return grads
 
 
 def as_array(t, dtype=None):
@@ -59,7 +76,7 @@ def as_array(t, dtype=None):
 
     Parameters
     ----------
-    t : backend.Tensor (tf.Constant)
+    t : backend.Tensor
     dtype : string, optional
         numpy datatype to return, derived from `t` by default
 
@@ -68,19 +85,11 @@ def as_array(t, dtype=None):
     np.array
         Same contents as t
     """
+
     if isinstance(t, np.ndarray):
-        return t if dtype is None else t.astype(dtype)
+        return t
 
-    if tf1:
-        with tf.Session().as_default():
-            return t.eval() if dtype is None else t.eval().astype(dtype)
-
-    elif not tf.executing_eagerly():
-        with tf.compat.v1.Session() as sess:
-            return t.eval() if dtype is None else t.eval().astype(dtype)
-
-    else:
-        return t.numpy() if dtype is None else t.numpy().astype(dtype)
+    return K.get_value(t) if dtype is None else K.get_value(t).astype(dtype)
 
 
 def as_tensor(x, dtype=None, device=None):
@@ -98,10 +107,14 @@ def as_tensor(x, dtype=None, device=None):
     backend.Tensor
         Same contents as x
     """
+
+    if isinstance(x, Tensor):
+        return x
+
     if dtype is None and x.dtype.kind == 'f':
         dtype = floatX
 
-    return tf.constant(x, dtype=dtype)
+    return K.constant(x, dtype=dtype)
 
 
 def int_shape(t):
@@ -119,7 +132,7 @@ def int_shape(t):
     tuple of int
         Tuple contains the size of each dimension of the tensor.
     """
-    return tuple(t.shape.as_list())
+    return K.int_shape(t)
 
 
 def shape(t):
@@ -137,25 +150,25 @@ def shape(t):
     tuple of int
         Tuple contains the size of each dimension of the tensor.
     """
-    return t.shape
+    return K.shape(t)
 
 
 def expand_dims(t, axis=-1):
-    return tf.expand_dims(t, axis)
+    return K.expand_dims(t, axis)
 
 
 def reshape(t, shape):
     if isinstance(t, np.ndarray):
         return t.reshape(shape)
 
-    return tf.reshape(t, shape)
+    return K.reshape(t, shape)
 
 
 def mean(t, axis=None, keepdims=False):
     if isinstance(t, np.ndarray):
         return t.mean(axis=axis, keepdims=keepdims)
 
-    return tf.reduce_mean(t, axis, keepdims)
+    return K.mean(t, axis, keepdims)
 
 
 def sum(t, axis=None, keepdims=False):
@@ -181,7 +194,7 @@ def sum(t, axis=None, keepdims=False):
     if isinstance(t, np.ndarray):
         return t.sum(axis=axis, keepdims=keepdims)
 
-    return tf.reduce_sum(t, axis, keepdims)
+    return K.sum(t, axis, keepdims)
 
 
 def max(t, axis=None, keepdims=False):
@@ -207,7 +220,7 @@ def max(t, axis=None, keepdims=False):
     if isinstance(t, np.ndarray):
         return t.max(axis=axis, keepdims=keepdims)
 
-    return tf.reduce_max(t, axis, keepdims)
+    return K.max(t, axis, keepdims)
 
 
 def min(t, axis=None, keepdims=False):
@@ -231,9 +244,9 @@ def min(t, axis=None, keepdims=False):
         Min of t
     """
     if isinstance(t, np.ndarray):
-        return t.min(axis=axis, keepdims=keepdims)
+        return t.sum(axis=axis, keepdims=keepdims)
 
-    return tf.reduce_min(t, axis, keepdims)
+    return K.min(t, axis, keepdims)
 
 
 def maximum(x, y):
@@ -251,7 +264,7 @@ def maximum(x, y):
         Element-wise maximum tensor
     """
 
-    return tf.maximum(x, y)
+    return K.maximum(x, y)
 
 
 def minimum(x, y):
@@ -268,7 +281,7 @@ def minimum(x, y):
     backend.Tensor
         Element-wise minimum tensor
     """
-    return tf.minimum(x, y)
+    return K.minimum(x, y)
 
 
 def abs(t):
@@ -284,7 +297,7 @@ def abs(t):
     backend.Tensor
         Each coordinate contains absolute value of corresponding input
     """
-    return tf.abs(t)
+    return K.abs(t)
 
 
 def ones_like(t, dtype=None, name=None):
@@ -307,7 +320,7 @@ def ones_like(t, dtype=None, name=None):
     backend.Tensor
         A tensor of ones has the same shape of input tensor
     """
-    return tf.ones_like(t, dtype=dtype, name=name)
+    return K.ones_like(t, dtype=dtype, name=name)
 
 
 def zeros_like(t, dtype=None, name=None):
@@ -330,11 +343,11 @@ def zeros_like(t, dtype=None, name=None):
     backend.Tensor
         A tensor of zeros has the same shape of input tensor
     """
-    return tf.zeros_like(t, dtype=dtype, name=name)
+    return K.zeros_like(t, dtype=dtype, name=name)
 
 
 def random_normal_like(t, mean=0., var=1.):
-    return tf.random.normal(t.shape, mean, stddev=np.sqrt(var))
+    return K.random_normal(K.shape(t), mean, stddev=np.sqrt(var))
 
 
 def clone(t, name=None):
@@ -370,7 +383,10 @@ def identity(t, name=None):
     backend.Tensor
         A tensor of zeros has the same shape of input tensor
     """
-    return tf.identity(t, name=name)
+    if backend == Backend.KERAS:
+        return K.identity(t, name=name)
+    elif backend == Backend.TF_KERAS:
+        return tf.identity(t, name=name)
 
 
 def sign(t):
@@ -386,7 +402,7 @@ def sign(t):
     backend.Tensor
 
     """
-    return tf.sign(t)
+    return K.sign(t)
 
 
 def stack(t):
@@ -402,13 +418,13 @@ def stack(t):
     backend.Tensor
 
     """
-    return tf.stack(t)
+    return K.stack(t)
 
 
 def tile(t: Tensor, shape):
     """ Same as np.tile ."""
 
-    return tf.tile(t, shape)
+    return K.tile(t, shape)
 
 
 def concat(ts: Sequence[Tensor], axis: int = 0) -> Tensor:
@@ -427,7 +443,7 @@ def concat(ts: Sequence[Tensor], axis: int = 0) -> Tensor:
     backend.Tensor
     
     """
-    return tf.concat(ts, axis=axis)
+    return K.concatenate(ts, axis=axis)
 
 
 def sigmoid(t, axis=None):
@@ -445,7 +461,7 @@ def sigmoid(t, axis=None):
     backend.Tensor
 
     """
-    return tf.sigmoid(t)
+    return K.sigmoid(t)
 
 
 def softmax(t, axis=-1):
@@ -463,7 +479,7 @@ def softmax(t, axis=-1):
     -------
     backend.Tensor
     """
-    return tf.nn.softmax(t, axis=axis)
+    return K.softmax(t, axis=axis)
 
 
 def is_tensor(x):
@@ -475,6 +491,8 @@ def is_tensor(x):
     x : backend.Tensor or other
     """
     try:
-        return isinstance(x, Tensor) or tf.keras.backend.is_keras_tensor(x)
+        is_keras_tensor = K.is_keras_tensor(x)
     except:
-        return False
+        is_keras_tensor = False
+
+    return isinstance(x, Tensor) or isinstance(x, TensorVar) or is_keras_tensor
