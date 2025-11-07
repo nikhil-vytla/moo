@@ -6,16 +6,16 @@ This document outlines potential improvements and missing features for the moo i
 
 | Method | Priority | Effort | Description | Reference |
 |--------|----------|--------|-------------|-----------|
-| **Grad-CAM / Grad-CAM++** | High | Low-Medium | Class Activation Mapping for CNNs. Most requested for computer vision. Provides class-discriminative localization. | Selvaraju et al. 2017, Chattopadhyay et al. 2018 |
-| **SmoothGrad** | High | Low | Noise-based gradient smoothing. Improves visual quality of saliency maps. We have GaussianDoI infrastructure that could support this. | Smilkov et al. 2017 |
-| **Expected Gradients** | High | Medium | Modern improvement on Integrated Gradients. Uses distributional baselines instead of single baseline. More robust attributions. | Erion et al. 2021 |
-| **Blur Integrated Gradients** | Medium | Low-Medium | Better baselines for image models. Uses blurred versions of input rather than black/uniform baseline. | Xu et al. 2020 |
-| **DeepLIFT** | Medium | Medium | Compares to reference activations. Similar to Integrated Gradients but discrete. | Shrikumar et al. 2017 |
-| **Layer-wise Relevance Propagation (LRP)** | Medium | High | Backpropagates relevance scores instead of gradients. Different theoretical foundation. | Bach et al. 2015 |
-| **Feature Visualization** | Medium | Medium | Optimization-based. Generates inputs that maximally activate specific neurons. Complements attribution. | Olah et al. 2017 |
-| **SHAP / DeepSHAP** | Low | High | Shapley Additive Explanations. Industry standard but game-theoretic (doesn't fit gradient paradigm). Many model evaluations. | Lundberg & Lee 2017 |
-| **LIME** | Low | Low-Medium | Local Interpretable Model-agnostic Explanations. Perturbation-based. Better for tabular/traditional ML than deep learning. | Ribeiro et al. 2016 |
-| **Occlusion Analysis** | Low | Low | Simple perturbation-based attribution. Baseline method. Useful for sanity checking. | Zeiler & Fergus 2014 |
+| **Grad-CAM / Grad-CAM++** | High | Low-Medium | Class Activation Mapping for CNNs. Most requested for computer vision. Provides class-discriminative localization. | [Selvaraju et al. 2017](https://arxiv.org/abs/1610.02391), [Chattopadhyay et al. 2018](https://arxiv.org/abs/1710.11063) |
+| **SmoothGrad** | High | Low | Noise-based gradient smoothing. Improves visual quality of saliency maps. We have GaussianDoI infrastructure that could support this. | [Smilkov et al. 2017](https://arxiv.org/abs/1706.03825) |
+| **Expected Gradients** | High | Medium | Modern improvement on Integrated Gradients. Uses distributional baselines instead of single baseline. More robust attributions. | [Erion et al. 2021](https://arxiv.org/abs/2102.05262) |
+| **Blur Integrated Gradients** | Medium | Low-Medium | Better baselines for image models. Uses blurred versions of input rather than black/uniform baseline. | [Xu et al. 2020](https://arxiv.org/abs/2004.03383) |
+| **DeepLIFT** | Medium | Medium | Compares to reference activations. Similar to Integrated Gradients but discrete. | [Shrikumar et al. 2017](https://arxiv.org/abs/1704.02685) |
+| **Layer-wise Relevance Propagation (LRP)** | Medium | High | Backpropagates relevance scores instead of gradients. Different theoretical foundation. | [Bach et al. 2015](https://arxiv.org/abs/1604.00825) |
+| **Feature Visualization** | Medium | Medium | Optimization-based. Generates inputs that maximally activate specific neurons. Complements attribution. | [Olah et al. 2017](https://distill.pub/2017/feature-visualization/) |
+| **SHAP / DeepSHAP** | Low | High | Shapley Additive Explanations. Industry standard but game-theoretic (doesn't fit gradient paradigm). Many model evaluations. | [Lundberg & Lee 2017](https://arxiv.org/abs/1705.07874) |
+| **LIME** | Low | Low-Medium | Local Interpretable Model-agnostic Explanations. Perturbation-based. Better for tabular/traditional ML than deep learning. | [Ribeiro et al. 2016](https://arxiv.org/abs/1602.04938) |
+| **Occlusion Analysis** | Low | Low | Simple perturbation-based attribution. Baseline method. Useful for sanity checking. | [Zeiler & Fergus 2014](https://arxiv.org/abs/1311.2901) |
 
 ## Transformer-Specific Features
 
@@ -24,9 +24,9 @@ _Note: moo currently works with transformers via gradient-based methods on embed
 | Feature | Priority | Effort | Description | Reference |
 |---------|----------|--------|-------------|-----------|
 | **Attention visualization** | High | Medium | Direct access to attention weights. Visualize which tokens attend to which. Per-head and per-layer analysis. | - |
-| **Attention rollout** | Medium | Low-Medium | Aggregate attention across layers. Shows effective attention from inputs to outputs. | Abnar & Zuidema 2020 |
-| **Attention flow** | Medium | Medium | Traces information flow through attention. More sophisticated than rollout. | Abnar & Zuidema 2020 |
-| **Influence Functions for LLMs** | Medium | High | Understanding training data impact on model predictions. Increasingly important for LLMs. | Koh & Liang 2017 |
+| **Attention rollout** | Medium | Low-Medium | Aggregate attention across layers. Shows effective attention from inputs to outputs. | [Abnar & Zuidema 2020](https://arxiv.org/abs/2005.00928) |
+| **Attention flow** | Medium | Medium | Traces information flow through attention. More sophisticated than rollout. | [Abnar & Zuidema 2020](https://arxiv.org/abs/2005.00928) |
+| **Influence Functions for LLMs** | Medium | High | Understanding training data impact on model predictions. Increasingly important for LLMs. | [Koh & Liang 2017](https://arxiv.org/abs/1703.04730) |
 | **Token generation attribution** | Low | Medium | Explain token-by-token generation in autoregressive models. | - |
 
 ## Architecture Support
@@ -60,24 +60,24 @@ _Note: moo currently works with transformers via gradient-based methods on embed
 
 ## Evaluation & Metrics
 
-| Metric Category | Priority | Effort | Description |
-|-----------------|----------|--------|-------------|
-| **Sanity checks** | High | Low-Medium | Model/data randomization tests. Verify explanations change when model changes. Essential validation. | Adebayo et al. 2018 |
-| **Faithfulness metrics** | High | Medium | Deletion curves, insertion curves, infidelity metrics |
-| **Completeness axiom verification** | High | Low | Verify Integrated Gradients satisfies completeness. Built-in validation for attribution methods. | Sundararajan et al. 2017 |
-| **ROAR/KAR benchmarks** | Medium | Medium | Standard metrics: Remove And Retrain, Keep And Retrain. Industry-standard evaluation. | Hooker et al. 2019 |
-| **Robustness checks** | Medium | Medium | Explanation stability under small input perturbations. Adversarial robustness of explanations. | Ghorbani et al. 2019 |
-| **Ground truth comparison** | Medium | Low-Medium | Pointing game for localization, IoU with bounding boxes (when ground truth available) |
+| Metric Category | Priority | Effort | Description | Reference |
+|-----------------|----------|--------|-------------|-----------|
+| **Sanity checks** | High | Low-Medium | Model/data randomization tests. Verify explanations change when model changes. Essential validation. | [Adebayo et al. 2018](https://arxiv.org/abs/1810.03292) |
+| **Faithfulness metrics** | High | Medium | Deletion curves, insertion curves, infidelity metrics | - |
+| **Completeness axiom verification** | High | Low | Verify Integrated Gradients satisfies completeness. Built-in validation for attribution methods. | [Sundararajan et al. 2017](https://arxiv.org/abs/1703.01365) |
+| **ROAR/KAR benchmarks** | Medium | Medium | Standard metrics: Remove And Retrain, Keep And Retrain. Industry-standard evaluation. | [Hooker et al. 2019](https://arxiv.org/abs/1806.10758) |
+| **Robustness checks** | Medium | Medium | Explanation stability under small input perturbations. Adversarial robustness of explanations. | [Ghorbani et al. 2019](https://arxiv.org/abs/1710.10547) |
+| **Ground truth comparison** | Medium | Low-Medium | Pointing game for localization, IoU with bounding boxes (when ground truth available) | - |
 
 ## Global Explanations
 
 _All current methods are local (single-sample). Missing dataset-level insights._
 
-| Feature | Priority | Effort | Description |
-|---------|----------|--------|-------------|
-| **Feature importance aggregation** | High | Low-Medium | Aggregate attributions across dataset. Which features matter most overall? |
-| **Influential training examples** | Medium | High | Which training examples most affected this prediction? (Influence functions) |
-| **Concept-based explanations** | Low | High | Testing with Concept Activation Vectors (TCAV). High-level concepts. Requires concept datasets. | Kim et al. 2018 |
+| Feature | Priority | Effort | Description | Reference |
+|---------|----------|--------|-------------|-----------|
+| **Feature importance aggregation** | High | Low-Medium | Aggregate attributions across dataset. Which features matter most overall? | - |
+| **Influential training examples** | Medium | High | Which training examples most affected this prediction? (Influence functions) | [Koh & Liang 2017](https://arxiv.org/abs/1703.04730) |
+| **Concept-based explanations** | Low | High | Testing with Concept Activation Vectors (TCAV). High-level concepts. Requires concept datasets. | [Kim et al. 2018](https://arxiv.org/abs/1711.11279) |
 
 ## Ecosystem Integration
 
