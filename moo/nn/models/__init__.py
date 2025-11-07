@@ -173,7 +173,7 @@ def get_model_wrapper(
                 None if B is None else B.backend, backend
             )
         )
-        os.environ['TRULENS_BACKEND'] = backend.name.lower()
+        os.environ['MOO_BACKEND'] = backend.name.lower()
         B = get_backend()
     else:
         tru_logger.info("Using backend {}.".format(B.backend))

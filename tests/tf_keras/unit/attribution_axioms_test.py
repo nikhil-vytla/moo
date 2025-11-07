@@ -1,6 +1,6 @@
 import os
 
-os.environ['TRULENS_BACKEND'] = 'tf.keras'
+os.environ['MOO_BACKEND'] = 'tf.keras'
 
 from tensorflow.python.util import deprecation
 

@@ -1,6 +1,6 @@
 import os
 
-os.environ['TRULENS_BACKEND'] = 'keras'
+os.environ['MOO_BACKEND'] = 'keras'
 
 from unittest import main
 from unittest import TestCase

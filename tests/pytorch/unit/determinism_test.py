@@ -3,7 +3,7 @@ import os
 from tests.unit.determinism_test_base import DeterminismTestBase
 from moo.nn.models import get_model_wrapper
 
-os.environ['TRULENS_BACKEND'] = 'pytorch'
+os.environ['MOO_BACKEND'] = 'pytorch'
 
 from unittest import main
 from unittest import TestCase

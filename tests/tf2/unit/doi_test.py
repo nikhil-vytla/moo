@@ -2,7 +2,7 @@ import os
 
 from moo.nn.models import get_model_wrapper
 
-os.environ['TRULENS_BACKEND'] = 'tensorflow'
+os.environ['MOO_BACKEND'] = 'tensorflow'
 
 from unittest import main
 from unittest import TestCase

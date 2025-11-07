@@ -21,7 +21,7 @@ class EnvironmentTest(EnvironmentTestBase, TestCase):
             def __init__(this):
                 super(M, this).__init__()
                 this.layer = Linear(self.input_size, self.output_size)
-                os.environ['TRULENS_BACKEND'] = 'pytorch'
+                os.environ['MOO_BACKEND'] = 'pytorch'
                 B = get_backend()
                 this.layer.weight.data = B.as_tensor(self.model_lin_weights.T)
                 this.layer.bias.data = B.as_tensor(self.model_lin_bias)

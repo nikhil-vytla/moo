@@ -1,6 +1,6 @@
 import os
 
-os.environ['TRULENS_BACKEND'] = 'pytorch'
+os.environ['MOO_BACKEND'] = 'pytorch'
 
 from unittest import main
 from unittest import TestCase

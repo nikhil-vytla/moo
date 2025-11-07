@@ -1,6 +1,6 @@
 import os
 
-os.environ['TRULENS_BACKEND'] = 'tensorflow'
+os.environ['MOO_BACKEND'] = 'tensorflow'
 
 import unittest
 from unittest import main

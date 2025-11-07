@@ -13,10 +13,10 @@ from moo.utils.typing import float_size
 
 __all__ = _ALL_BACKEND_API_FUNCTIONS
 
-if 'TRULENS_BACKEND' in os.environ.keys():
-    _TRULENS_BACKEND = os.environ['TRULENS_BACKEND']
+if 'MOO_BACKEND' in os.environ.keys():
+    _MOO_BACKEND = os.environ['MOO_BACKEND']
 
-backend = Backend.from_name(_TRULENS_BACKEND)
+backend = Backend.from_name(_MOO_BACKEND)
 
 if backend == Backend.TF_KERAS:
     import tensorflow as tf
