@@ -15,6 +15,7 @@ thought of as a sub-model that uses the features computed by $h$.
 from typing import Callable, List, Optional, Union
 
 from moo.nn.backend import get_backend
+from moo.utils import moo_logger
 from moo.utils.typing import render_object
 from moo.utils.typing import TensorLike
 
@@ -75,7 +76,7 @@ class Cut(object):
             if (isinstance(name, int) or
                 (isinstance(name, list) and isinstance(name[0], int))):
 
-                tru_logger.warning(
+                moo_logger.warning(
                     '\n\nPytorch does not have native support for indexed '
                     'layers. Using layer indices is not recommended.\n'
                 )

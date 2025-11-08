@@ -33,7 +33,7 @@ from moo.nn.slices import Cut
 from moo.nn.slices import InputCut
 from moo.nn.slices import OutputCut
 from moo.nn.slices import Slice
-from moo.utils import tru_logger
+from moo.utils import moo_logger
 from moo.utils.typing import ArgsLike
 from moo.utils.typing import DATA_CONTAINER_TYPE
 from moo.utils.typing import Inputs
@@ -206,7 +206,7 @@ class AttributionMethod(AbstractBaseClass):
                                      np.ndarray]] = om_of_many(attributions)
 
         if pieces.gradients is not None or pieces.interventions is not None:
-            tru_logger.warning(
+            moo_logger.warning(
                 "AttributionMethod configured to return gradients or interventions. "
                 "Use the internal _attribution call to retrieve those."
             )

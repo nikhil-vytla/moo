@@ -17,7 +17,7 @@ from moo.nn.quantities import QoI
 from moo.nn.slices import Cut
 from moo.nn.slices import InputCut
 from moo.nn.slices import OutputCut
-from moo.utils import tru_logger
+from moo.utils import moo_logger
 from moo.utils.typing import ArgsLike
 from moo.utils.typing import DATA_CONTAINER_TYPE
 from moo.utils.typing import Inputs
@@ -291,7 +291,7 @@ class ModelWrapper(AbstractBaseClass):
                     model_inputs = intervention.as_model_inputs()
 
                     if len(model_inputs.kwargs) > 0:
-                        tru_logger.warning(
+                        moo_logger.warning(
                             "Intervention for InputCut DoI specified but contains only positional arguments. "
                             "The rest will be taken from model_kwargs. If you need to intervene on keyword "
                             "arguments, provide the intervention as a ModelInputs container."

@@ -35,4 +35,4 @@ dependencies:
       - python-markdown-math==0.7
       - yapf==0.32.0
       - isort==5.10.1
-prefix: /home/truera/miniconda3/envs/python3_10
+prefix: /home/moo/miniconda3/envs/python3_10

@@ -6,7 +6,7 @@ import traceback
 from typing import Iterable, Tuple
 
 import numpy as np
-from moo.utils import tru_logger
+from moo.utils import moo_logger
 from moo.utils.typing import ModelInputs
 from moo.utils.typing import nested_map
 from moo.utils.typing import om_of_many
@@ -133,7 +133,7 @@ def tile(what: TensorAKs, onto: TensorAKs) -> TensorAKs:
         dimension. Otherwise return original val unchanged."""
 
         if val.shape[0] != inputs_dim:
-            tru_logger.warning(
+            moo_logger.warning(
                 f"Value {val} of shape {val.shape} is assumed to not be "
                 f"batchable due to its shape not matching prior batchable "
                 f"values of shape ({inputs_dim},...). If this is "
@@ -151,7 +151,7 @@ def tile(what: TensorAKs, onto: TensorAKs) -> TensorAKs:
         elif B.is_tensor(val):
             return B.tile(val, repeat_shape)
         else:
-            tru_logger.debug(
+            moo_logger.debug(
                 f"Ignoring tiling of unhandled val {val.__class__.__name__}"
             )
             return val
@@ -216,7 +216,7 @@ def get_backend(suppress_warnings=False):
 
         elif _MOO_BACKEND == Backend.UNKNOWN:
             if not suppress_warnings:
-                tru_logger.warning(
+                moo_logger.warning(
                     'The current backend is unset or unknown. moo will '
                     'attempt to use any previously loaded backends, but may '
                     'cause problems. Valid backends are `pytorch`, '
@@ -228,11 +228,11 @@ def get_backend(suppress_warnings=False):
 
     except (ImportError, ModuleNotFoundError):
         _MOO_BACKEND_IMPL = None
-        tru_logger.error(
+        moo_logger.error(
             'Error processing backend {}. Backend is reset to None'.
             format(_MOO_BACKEND)
         )
-        tru_logger.error(traceback.format_exc())
+        moo_logger.error(traceback.format_exc())
 
     return _MOO_BACKEND_IMPL
 

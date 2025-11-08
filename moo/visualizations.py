@@ -35,7 +35,7 @@ from moo.nn.models._model_base import ModelWrapper
 from moo.nn.quantities import InternalChannelQoI
 from moo.nn.slices import Cut
 from moo.nn.slices import InputCut
-from moo.utils import tru_logger
+from moo.utils import moo_logger
 from moo.utils.typing import KwargsLike
 from moo.utils.typing import ModelInputs
 from moo.utils.typing import Tensor
@@ -1208,7 +1208,7 @@ class NLP(object):
 
             except NameError:
                 output = PlainText()
-                tru_logger(
+                moo_logger(
                     "WARNING: could not guess preferred visualization output format, using PlainText"
                 )
 

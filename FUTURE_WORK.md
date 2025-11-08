@@ -112,7 +112,7 @@ _All current methods are local (single-sample). Missing dataset-level insights._
 
 | Change | Impact | Effort | Description |
 |--------|--------|--------|-------------|
-| **Rename `tru_logger`** | Low | Low | Now that it's "moo", should be `moo_logger` |
+| **Rename `tru_logger`** | Low | Low | ~~Now that it's "moo", should be `moo_logger`~~ **COMPLETED** |
 | **Simplify type system** | Medium | High | The typing infrastructure is very complex |
 | **Modern Python features** | Medium | Medium | Require Python 3.10+ for newer syntax |
 

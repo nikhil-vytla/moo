@@ -15,7 +15,7 @@ from moo.nn.slices import Cut
 from moo.nn.slices import InputCut
 from moo.nn.slices import LogitCut
 from moo.nn.slices import OutputCut
-from moo.utils import tru_logger
+from moo.utils import moo_logger
 from moo.utils.typing import DATA_CONTAINER_TYPE
 from moo.utils.typing import Inputs
 from moo.utils.typing import many_of_om
@@ -60,12 +60,12 @@ class PytorchModelWrapper(ModelWrapper):
         """
 
         if 'input_shape' in kwargs:
-            tru_logger.deprecate(
+            moo_logger.deprecate(
                 f"PytorchModelWrapper: input_shape parameter is no longer used and will be removed in the future"
             )
             del kwargs['input_shape']
         if 'input_dtype' in kwargs:
-            tru_logger.deprecate(
+            moo_logger.deprecate(
                 f"PytorchModelWrapper: input_dtype parameter is no longer used and will be removed in the future"
             )
             del kwargs['input_dtype']
@@ -98,7 +98,7 @@ class PytorchModelWrapper(ModelWrapper):
         self._tensors = list(layers.values())
 
         if len(self._tensors) == 0:
-            tru_logger.warning(
+            moo_logger.warning(
                 "model has no visible components, you will not be able to specify cuts"
             )
 
@@ -345,7 +345,7 @@ class PytorchModelWrapper(ModelWrapper):
                 )
             else:
                 if doi_cut.anchor is not None and doi_cut.anchor != 'out':
-                    tru_logger.warning(
+                    moo_logger.warning(
                         f"Unrecognized doi_cut.anchor {doi_cut.anchor}. Defaulting to `out` anchor."
                     )
                 in_handle = (
@@ -447,7 +447,7 @@ class PytorchModelWrapper(ModelWrapper):
                 # Adding warning here only if there is more than 1 dimension
                 # being summed. If there is only 1 dim, its likely the batching
                 # dimension so sum there is probably expected.
-                tru_logger.warning(
+                moo_logger.warning(
                     f"Attribution tensor is not scalar (it is of shape {t.shape} "
                     f"and will be summed. This may not be your intention."
                 )
