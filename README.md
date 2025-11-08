@@ -1,4 +1,4 @@
-# moo
+# moo 🐮
 
 **moo** is a neural network interpretability library designed to help you understand and explain deep learning model predictions through gradient-based attribution methods.
 
@@ -36,16 +36,16 @@ The library supports multiple deep learning frameworks (PyTorch, TensorFlow, Ker
 
 ## Acknowledgements
 
-**moo** is a continuation of the **TruLens-Explain** library, originally developed by TruEra. This library builds upon the excellent foundation and research contributions of the original TruLens team.
+**moo** is a continuation of the [**trulens-explain**](https://github.com/truera/trulens_explain) library, created by the TruEra Research team. I really enjoyed contributing to and using TruLens during my time at TruEra, and since `trulens-explain` is no longer actively maintained, I’m launching **moo** in the hopes of carrying forward and expanding on the foundational research behind the original library.
 
 The core attribution methods implemented in this library are based on the following research:
 
-- **Internal Influence**: Klas Leino, Shayak Sen, Anupam Datta, Matt Fredrikson, and Linyi Li. "Influence-Directed Explanations for Deep Convolutional Networks." IEEE ITC 2018.
-- **Integrated Gradients**: Mukund Sundararajan, Ankur Taly, and Qiqi Yan. "Axiomatic Attribution for Deep Networks." ICML 2017.
-- **Gradient-based Saliency Maps**: Karen Simonyan, Andrea Vedaldi, and Andrew Zisserman. "Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps." ICLR 2014.
+- **Internal Influence**: Klas Leino, Shayak Sen, Anupam Datta, Matt Fredrikson, and Linyi Li. "[Influence-Directed Explanations for Deep Convolutional Networks](https://arxiv.org/abs/1802.03788)." IEEE ITC 2018.
+- **Integrated Gradients**: Mukund Sundararajan, Ankur Taly, and Qiqi Yan. "[Axiomatic Attribution for Deep Networks](https://arxiv.org/abs/1703.01365)." ICML 2017.
+- **Gradient-based Saliency Maps**: Karen Simonyan, Andrea Vedaldi, and Andrew Zisserman. "[Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps](https://arxiv.org/abs/1312.6034)." ICLR 2014.
 
-We are grateful to the original authors and contributors of TruLens-Explain for making their work publicly available and for advancing the field of neural network interpretability.
+I’m deeply grateful to the original authors and contributors of `trulens-explain`—many of whom I had the pleasure of working with—for making their work publicly available and advancing the field of neural network interpretability.
 
-## License
+## Why moo? 🐄
 
-This project maintains the same license as the original TruLens-Explain library.
+It's an inside joke! 🤭
