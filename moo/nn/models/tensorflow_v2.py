@@ -9,7 +9,7 @@ from moo.nn.slices import Cut
 from moo.nn.slices import InputCut
 from moo.nn.slices import LogitCut
 from moo.nn.slices import OutputCut
-from moo.utils import tru_logger
+from moo.utils import moo_logger
 from moo.utils.typing import DATA_CONTAINER_TYPE
 from moo.utils.typing import Inputs
 from moo.utils.typing import many_of_om
@@ -103,7 +103,7 @@ class Tensorflow2ModelWrapper(KerasModelWrapper
     def _warn_keras_layers(self, layers):
         keras_layers = [l for l in layers if 'KerasLayer' in str(type(l))]
         if (keras_layers):
-            tru_logger.warning('Detected a KerasLayer in the model. This can sometimes create issues during attribution runs or subsequent model calls. \
+            moo_logger.warning('Detected a KerasLayer in the model. This can sometimes create issues during attribution runs or subsequent model calls. \
                 If failures occur: try saving the model, deactivating eager mode with tf.compat.v1.disable_eager_execution(), \
                 setting tf.config.run_functions_eagerly(False), and reloading the model.'\
                     'Detected KerasLayers from model.layers: %s' % str(keras_layers))
@@ -203,7 +203,7 @@ class Tensorflow2ModelWrapper(KerasModelWrapper
                             layer.input_intervention = intervention_fn
                         else:
                             if doi_cut.anchor is not None and doi_cut.anchor != 'out':
-                                tru_logger.warning(
+                                moo_logger.warning(
                                     f"Unrecognized doi_cut.anchor {doi_cut.anchor}. Defaulting to `out` anchor."
                                 )
                             layer.output_intervention = intervention_fn

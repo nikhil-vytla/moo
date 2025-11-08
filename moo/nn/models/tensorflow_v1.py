@@ -10,7 +10,7 @@ from moo.nn.slices import Cut
 from moo.nn.slices import InputCut
 from moo.nn.slices import LogitCut
 from moo.nn.slices import OutputCut
-from moo.utils import tru_logger
+from moo.utils import moo_logger
 from moo.utils.typing import DATA_CONTAINER_TYPE
 from moo.utils.typing import Inputs
 from moo.utils.typing import many_of_om
@@ -158,7 +158,7 @@ class TensorflowModelWrapper(ModelWrapper):
             )
 
         if num_args > 0 and num_kwargs > 0:
-            tru_logger.warning(
+            moo_logger.warning(
                 "Got both args and kwargs as inputs; we assume the args correspond to the first input tensors."
             )
 

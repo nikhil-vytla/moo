@@ -1,7 +1,7 @@
 import collections
 
 from moo.nn.backend import get_backend
-from moo.utils import tru_logger
+from moo.utils import moo_logger
 from moo.utils.typing import many_of_om
 from moo.utils.typing import om_of_many
 
@@ -55,7 +55,7 @@ def get_layer_input_paths(model):
             for i, elem in enumerate(obj):
                 ret.update(recurse_outputs(elem, prefix + [i]))
         else:
-            tru_logger.warning(type(obj))
+            moo_logger.warning(type(obj))
         return ret
 
     def get_arg_path(layers, obj):
@@ -347,7 +347,7 @@ def trace_input_indices(model, keras_module):
                 if out_layer.name in innode_indices and innode_indices[
                         out_layer.name] != idx:
                     # May occur if layer is shared between other layers in the same model
-                    tru_logger.warning(
+                    moo_logger.warning(
                         f"{out_layer.name}: input node conflict. orig: {innode_indices[out_layer.name]}, new: {idx}. Keeping original"
                     )
                 if out_layer.name not in innode_indices:
@@ -359,7 +359,7 @@ def trace_input_indices(model, keras_module):
         nodes_by_depth = model._nodes_by_depth
         tracer(0)
     except AttributeError:
-        tru_logger.warning(
+        moo_logger.warning(
             "The provided model is missing Keras graph nodes metadata."
             "moo will assume layers are using their default input/output tensors."
             "This should not cause issues unless the model's layers have multiple inputs."
@@ -439,7 +439,7 @@ def flatten_substitute_tfhub(model, keras_module, tfhub_module):
                 replacements[layer] = submodel
             except (OSError, ValueError):
                 # TODO: default to chainrule if keras layer substitution doesn't work
-                tru_logger.warning(
+                moo_logger.warning(
                     f"Unable to substitute Tensorflow Hub model {layer.name} with Keras implementation."
                     f"Its nested layers will be hidden."
                 )

@@ -16,7 +16,7 @@ from moo.nn.slices import Cut
 from moo.nn.slices import InputCut
 from moo.nn.slices import LogitCut
 from moo.nn.slices import OutputCut
-from moo.utils import tru_logger
+from moo.utils import moo_logger
 from moo.utils.typing import DATA_CONTAINER_TYPE
 from moo.utils.typing import many_of_om
 from moo.utils.typing import ModelInputs
@@ -58,7 +58,7 @@ def import_tfhub_deps():
     try:
         tfhub = importlib.import_module(name='tensorflow_hub')
     except ModuleNotFoundError:
-        tru_logger.info(
+        moo_logger.info(
             "To use moo with Tensorflow Hub models, run 'pip install tensorflow-hub tf-models-official'"
         )
 
@@ -211,7 +211,7 @@ class KerasModelWrapper(ModelWrapper):
         # sigmoid.
         if not (activation == self.keras.activations.softmax or
                 activation == self.keras.activations.sigmoid):
-            tru_logger.warning(
+            moo_logger.warning(
                 'The activation of the specified layer to '
                 '`_replace_probits_with_logits` is not a softmax or a sigmoid; '
                 'it may not currently convert its input to probits.'
@@ -377,7 +377,7 @@ class KerasModelWrapper(ModelWrapper):
         ]
 
         if cut.anchor not in ['in', 'out']:
-            tru_logger.warning(
+            moo_logger.warning(
                 f"Unrecognized cut.anchor {cut.anchor}. Defaulting to `out` anchor."
             )
             outputs = [self._get_layer_output(layer) for layer in layers]

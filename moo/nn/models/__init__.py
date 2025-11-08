@@ -17,7 +17,7 @@ import traceback
 
 from moo.nn.backend import Backend
 from moo.nn.backend import get_backend
-from moo.utils import tru_logger
+from moo.utils import moo_logger
 from moo.utils.typing import ModelLike
 
 
@@ -145,12 +145,12 @@ def get_model_wrapper(
     """
 
     if 'input_shape' in kwargs:
-        tru_logger.deprecate(
+        moo_logger.deprecate(
             f"get_model_wrapper: input_shape parameter is no longer used and will be removed in the future"
         )
         del kwargs['input_shape']
     if 'input_dtype' in kwargs:
-        tru_logger.deprecate(
+        moo_logger.deprecate(
             f"get_model_wrapper: input_dtype parameter is no longer used and will be removed in the future"
         )
         del kwargs['input_dtype']
@@ -160,7 +160,7 @@ def get_model_wrapper(
 
     if backend is None:
         backend = discern_backend(model)
-        tru_logger.info(
+        moo_logger.info(
             "Detected {} backend for {}.".format(
                 backend.name.lower(), type(model)
             )
@@ -168,7 +168,7 @@ def get_model_wrapper(
     else:
         backend = Backend.from_name(backend)
     if B is None or (backend is not Backend.UNKNOWN and B.backend != backend):
-        tru_logger.info(
+        moo_logger.info(
             "Changing backend from {} to {}.".format(
                 None if B is None else B.backend, backend
             )
@@ -176,8 +176,8 @@ def get_model_wrapper(
         os.environ['MOO_BACKEND'] = backend.name.lower()
         B = get_backend()
     else:
-        tru_logger.info("Using backend {}.".format(B.backend))
-    tru_logger.info(
+        moo_logger.info("Using backend {}.".format(B.backend))
+    moo_logger.info(
         "If this seems incorrect, you can force the correct backend by passing the `backend` parameter directly into your get_model_wrapper call."
     )
     if B.backend.is_keras_derivative():
@@ -212,11 +212,11 @@ def get_model_wrapper(
         else:
             from moo.nn.models.tensorflow_v1 import TensorflowModelWrapper
             if input_tensors is None:
-                tru_logger.error(
+                moo_logger.error(
                     'tensorflow1 model must pass parameter: input_tensors'
                 )
             if output_tensors is None:
-                tru_logger.error(
+                moo_logger.error(
                     'tensorflow1 model must pass parameter: output_tensors'
                 )
             return TensorflowModelWrapper(
